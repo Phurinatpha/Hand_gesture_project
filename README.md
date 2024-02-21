@@ -12,8 +12,13 @@ This Python program allows you to control your keyboard using hand gestures capt
 ## Usage
 
 1. Clone the repository: $ git clone https://github.com/Phurinatpha/Hand_gesture_project.git
+<<<<<<< HEAD
 2. Install requirement: $ pip install -r requirement.txt
 3. Run the Python script file : project.py
+=======
+2. Install requirement: $ pip install -r requirements.txt
+3. Run the Python script
+>>>>>>> d13b3eac5484619856d0c70961bff9c37db0d9d2
 4. The webcam will open, and you'll see a live feed with your hand movements. 
 5. Move your hand in different directions to simulate arrow key presses:
    - Moving your hand left will press the left arrow key.
