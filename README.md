@@ -11,7 +11,7 @@ This Python program allows you to control your keyboard using hand gestures capt
 
 ## Usage
 
-1. Clone the repository: $ git clone http://github.com/Phurinatpha/combi_project.git
+1. Clone the repository: $ git clone https://github.com/Phurinatpha/Hand_gesture_project.git
 2. Install requirement: $ pip install -r requirement.txt
 3. Run the Python script
 4. The webcam will open, and you'll see a live feed with your hand movements. 
