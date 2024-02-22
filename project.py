@@ -7,7 +7,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
 # Initialize hand tracking
-hands = mp_hands.Hands(max_num_hands=1)
+hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.8)
 
 # Set up camera capture
 cap = cv2.VideoCapture(0)
@@ -18,6 +18,8 @@ prev_landmarks = None
 # Cooldown timer
 cooldown_timer = time.time()
 cooldown_duration = 0.5  # Adjust the cooldown duration as needed
+
+movement_threshold = 0.04
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -42,9 +44,9 @@ while cap.isOpened():
             # Get coordinates of specific landmarks
             thumb_tip = landmarks[4]
             index_tip = landmarks[8]
-            middle_tip = landmarks[12]
-            ring_tip = landmarks[16]
-            pinky_tip = landmarks[20]
+            # middle_tip = landmarks[12]
+            # ring_tip = landmarks[16]
+            # pinky_tip = landmarks[20]
 
             # Detect hand movement
             if prev_landmarks is not None:
@@ -54,23 +56,22 @@ while cap.isOpened():
 
                 # Check if cooldown period has elapsed
                 if time.time() - cooldown_timer > cooldown_duration:
-                    # Move left
-                    if dx < -0.01:
+                    # Move left right
+                    if dx < -movement_threshold:
                         pyautogui.press('right')
-                        cooldown_timer = time.time()  # Reset cooldown timer
-                    # Move right
-                    elif dx > 0.01:
+                        cooldown_timer = time.time()  
+                    elif dx > movement_threshold:
                         pyautogui.press('left')
-                        cooldown_timer = time.time()  # Reset cooldown timer
-                    # Move up
-                    elif dy < -0.01:
-                        pyautogui.press('up')
-                        cooldown_timer = time.time()  # Reset cooldown timer
-                    # Move down
-                    elif dy > 0.01:
-                        pyautogui.press('down')
-                        cooldown_timer = time.time()  # Reset cooldown timer
+                        cooldown_timer = time.time()  
 
+                    # Move up down
+                    elif dy < -movement_threshold:
+                        pyautogui.press('up')
+                        cooldown_timer = time.time() 
+                    elif dy > movement_threshold:
+                        pyautogui.press('down')
+                        cooldown_timer = time.time()
+                
             # Update previous landmarks
             prev_landmarks = hand_landmarks.landmark
 
