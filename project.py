@@ -17,9 +17,9 @@ prev_landmarks = None
 
 # Cooldown timer
 cooldown_timer = time.time()
-cooldown_duration = 0.5  # Adjust the cooldown duration as needed
+cooldown_duration = 0.2  # Adjust the cooldown duration as needed
 
-movement_threshold = 0.04
+movement_threshold = 0.03
 
 while cap.isOpened():
     ret, frame = cap.read()
